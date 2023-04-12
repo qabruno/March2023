@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using March2023.Utilities;
+using OpenQA.Selenium;
 
 
 namespace March2023.Pages
@@ -10,6 +11,7 @@ namespace March2023.Pages
             // navigate to time and material module
             IWebElement administration = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a/span"));
             administration.Click();
+            Wait.WaitToBeClickable(driver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a", 7);
 
             IWebElement tmOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             tmOption.Click();

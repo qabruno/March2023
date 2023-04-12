@@ -1,5 +1,6 @@
-﻿using OpenQA.Selenium;
-
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace March2023.Pages
 {
@@ -7,6 +8,7 @@ namespace March2023.Pages
     {
         public void CreateTM(IWebDriver driver)
         {
+
             // click on create new button
             IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
             createNewButton.Click();
@@ -42,15 +44,21 @@ namespace March2023.Pages
             goToLastPageButton.Click();
 
             IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
 
-            if (newCode.Text == "March2023")
-            {
-                Console.WriteLine("New record has been created successfully.");
-            }
-            else
-            {
-                Console.WriteLine("Record hasn't been created.");
-            }
+            Assert.That(newCode.Text == "March2023", "Actual code and expected code do not match.");
+            Assert.That(newDescription.Text == "March2023", "Actual description and expected description do not match.");
+            Assert.That(newPrice.Text == "$12.00", "Actual price and expected price do not match.");
+
+            //if (newCode.Text == "March2023")
+            //{
+            //    Assert.Pass("New record has been created successfully.");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Record hasn't been created.");
+            //}
         }
 
         public void EditTM(IWebDriver driver)

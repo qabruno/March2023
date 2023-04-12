@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using March2023.Utilities;
+using OpenQA.Selenium;
 
 namespace March2023.Pages
 {
@@ -10,7 +11,7 @@ namespace March2023.Pages
 
             // launch turn up portal 
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
-            Thread.Sleep(1000);
+            Wait.WaitToBeVisible(driver, "Id", "UserName", 10);
 
             // identify username textbox and enter valid username
             IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
