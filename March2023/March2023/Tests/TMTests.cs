@@ -12,50 +12,48 @@ using March2023.Utilities;
 namespace March2023.Tests
 {
     [TestFixture]
+    [Parallelizable]
     public class TMTests : CommonDriver
     {
+        LoginPage loginPageObj = new LoginPage();
+        HomePage homePageObj = new HomePage();
+        TMPage tmPageObject = new TMPage();
+
         [SetUp]
         public void LoginActions()
         {
             driver = new ChromeDriver();
-
-            // Login page object initialization and definition
-            LoginPage loginPageObj = new LoginPage();
+           
             loginPageObj.LoginSteps(driver);
-
-            // Home page object initialization and definition
-            HomePage homePageObj = new HomePage();
-            homePageObj.GoToTMPage(driver);
+            homePageObj.GoToTMPage();
         }
 
-        [Test]
+        [Test, Order (1), Description ("This test checks if a user is able to create a new TM record")]
         public void CreateTM_Test()
         {
             // TM page object initialization and definition
-            TMPage tmPageObject = new TMPage();
-            tmPageObject.CreateTM(driver);
+            
+            tmPageObject.CreateTM();
         }
 
-        [Test]
+        [Test, Order (2), Description("This test checks if a user is able to edit an existing TM record")]
         public void EditTM_Test()
         {
-            // TM page object initialization and definition
-            TMPage tmPageObject = new TMPage();
-            tmPageObject.EditTM(driver);
+
+            tmPageObject.EditTM();
         }
 
-        [Test]
+        [Test, Order (3), Description("This test checks if a user is able to delete an existing TM record")]
         public void DeleteTM_Test()
         {
-            // TM page object initialization and definition
-            TMPage tmPageObject = new TMPage();
-            tmPageObject.DeleteTM(driver);
+
+            tmPageObject.DeleteTM();
         }
 
         [TearDown]
         public void CloseTestRun()
         {
-
+            driver.Quit();
         }
     }
 }

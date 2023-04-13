@@ -1,4 +1,5 @@
 ﻿using March2023.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace March2023.Pages
@@ -13,9 +14,16 @@ namespace March2023.Pages
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
             Wait.WaitToBeVisible(driver, "Id", "UserName", 10);
 
-            // identify username textbox and enter valid username
-            IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
-            usernameTextbox.SendKeys("hari");
+            try
+            {
+                // identify username textbox and enter valid username
+                IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
+                usernameTextbox.SendKeys("hari");
+            }
+            catch(Exception ex)
+            {
+                Assert.Fail("TurnUp portal login page hasn't loaded successfully", ex.Message);
+            }
 
             // indentify password textbox and enter valid password
             IWebElement passwordTextbox = driver.FindElement(By.Id("Password"));
